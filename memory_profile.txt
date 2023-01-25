@@ -1,0 +1,24 @@
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+     5     56.8 MiB     56.8 MiB           1   @profile
+     6                                         def func():
+     7                                            #Creating the matrixes with random sampling
+     8   7686.3 MiB   7629.5 MiB           1      A = np.random.uniform(0.00000001,1,(pow(10,6),pow(10,3)))
+     9  15315.7 MiB   7629.3 MiB           1      B = np.random.uniform(0.00000001,1,(pow(10,3),pow(10,6)))
+    10  15323.5 MiB      7.8 MiB           1      C = np.random.uniform(0.00000001,1,(pow(10,6),1))
+    11
+    12                                            #Matrix multiplications
+    13  15323.5 MiB      0.0 MiB           1      BC = np.matmul(B, C)
+    14  15331.0 MiB      7.6 MiB           1      D = np.matmul(A, BC)
+    15
+    16                                            #Taking a random sample from matrix A to show the distribution
+    17  15331.0 MiB      0.0 MiB           1      rng = np.random.default_rng()
+    18  16094.4 MiB    763.4 MiB           1      sample = rng.choice(A, pow(10,5), replace=False)
+    19  16857.3 MiB    762.8 MiB           1      flat = sample.flatten()
+    20
+    21                                            #Plotting the CDF for the sample from A
+    22  17620.2 MiB    762.9 MiB           1      x = np.sort(flat)
+    23  18383.4 MiB    763.2 MiB           1      y = 1. * np.arange(len(x)) / (len(x) - 1)
+    24  22962.4 MiB   4579.0 MiB           1      plt.plot(x, y)
+    25  24493.0 MiB   1530.7 MiB           1      plt.savefig('cdf.png')
+
